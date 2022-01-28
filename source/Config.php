@@ -5,15 +5,15 @@ use PHPMailer\PHPMailer\SMTP;
 
 include __DIR__ . "/../vendor/autoload.php";
 
-define("URL_BASE", "http://localhost/mvcc/");
+define("URL_BASE", "https://transdonis.herokuapp.com/");
 
 define("DATA_LAYER_CONFIG", [
     "driver" => "mysql",
-    "host" => "localhost",
+    "host" => "kutnpvrhom7lki7u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
     "port" => "3306",
-    "dbname" => "transdoni",
-    "username" => "root",
-    "passwd" => "",
+    "dbname" => "vxfkvovlvera1kiq",
+    "username" => "rt38wt2ysx9xhqkh",
+    "passwd" => "ko0uy2nvrvixy85m",
     "options" => [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -23,10 +23,10 @@ define("DATA_LAYER_CONFIG", [
 ]);
 date_default_timezone_set('America/Sao_Paulo');
 
-define("HOST", "localhost");
-define("USER", "root");
-define("PASS", "");
-define("DB", "transdoni");
+define("HOST", "kutnpvrhom7lki7u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com");
+define("USER", "rt38wt2ysx9xhqkh");
+define("PASS", "ko0uy2nvrvixy85m");
+define("DB", "vxfkvovlvera1kiq");
 
 /**
  * @return PHPMailer
@@ -48,8 +48,8 @@ function getSend(): PHPMailer
             'allow_self_signed' => true
         )
     );
-    $send->Username = 'mdmion@gmail.com';
-    $send->Password = 'marcelo247867';
+    $send->Username = 'esayfreight@gmail.com';
+    $send->Password = 'Santos-13';
     return $send;
 }
 
