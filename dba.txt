@@ -1,0 +1,1 @@
+CLEARDB_DATABASE_URL mysqlbaa3387beae7ff6d5d9f0c@us-cdbr-east-05.cleardb.netheroku_7032aea5d830706reconnect=true

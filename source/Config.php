@@ -9,11 +9,11 @@ define("URL_BASE", "https://transdonis.herokuapp.com/");
 
 define("DATA_LAYER_CONFIG", [
     "driver" => "mysql",
-    "host" => "kutnpvrhom7lki7u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host" => "us-cdbr-east-05.cleardb.net",
     "port" => "3306",
-    "dbname" => "vxfkvovlvera1kiq",
-    "username" => "rt38wt2ysx9xhqkh",
-    "passwd" => "ko0uy2nvrvixy85m",
+    "dbname" => "heroku_7032aea5d830706",
+    "username" => "baa3387beae7ff",
+    "passwd" => "6d5d9f0c",
     "options" => [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -23,10 +23,10 @@ define("DATA_LAYER_CONFIG", [
 ]);
 date_default_timezone_set('America/Sao_Paulo');
 
-define("HOST", "kutnpvrhom7lki7u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com");
-define("USER", "rt38wt2ysx9xhqkh");
-define("PASS", "ko0uy2nvrvixy85m");
-define("DB", "vxfkvovlvera1kiq");
+define("HOST", "us-cdbr-east-05.cleardb.net");
+define("USER", "baa3387beae7ff");
+define("PASS", "6d5d9f0c");
+define("DB", "heroku_7032aea5d830706");
 
 /**
  * @return PHPMailer
