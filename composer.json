@@ -1,0 +1,45 @@
+{
+    "name": "gustavobdev/rush2",
+    "description": "Desenvolvido para você acompanhar todas as campanhas em tempo real",
+    "minimum-stability": "stable",
+    "license": "proprietary",
+    "authors": [{
+        "name": "gustavo.bomfim",
+        "email": "gustavobdev@gmail.com"
+    }],
+    "Config": {
+        "vendor-dir": "vendor"
+    },
+    "autoload": {
+        "psr-4": {
+            "Source\\": "source/"
+        },
+        "files": [
+            "source/Config.php",
+            "plugins/Sweetalert.php",
+            "plugins/functions/sanitizePost.php",
+            "plugins/alerts/landing/login.php",
+            "plugins/alerts/landing/tracking.php",
+            "plugins/alerts/dashboard/editfrete.php",
+            "plugins/alerts/dashboard/messageDash.php",
+            "plugins/alerts/dashboard/excluipdf.php",
+            "plugins/alerts/app/messageperfil.php",
+            "plugins/alerts/app/verificaservico.php",
+            "plugins/alerts/app/verificaperfil.php"
+        ]
+
+    },
+    "require": {
+        "php": "^7.4",
+        "phpmailer/phpmailer": "v6.5.*",
+        "coffeecode/datalayer": "1.1.*",
+        "coffeecode/router": "1.0.*",
+        "coffeecode/paginator": "1.0.*",
+        "coffeecode/uploader": "1.0.11",
+        "league/plates": "3.3.*",
+        "ext-pdo": "*",
+        "ext-json": "*",
+        "dompdf/dompdf": "*",
+        "monolog/monolog": "*"
+    }
+}

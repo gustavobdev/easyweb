@@ -1,0 +1,217 @@
+.cdaterminalcoleta {
+    background: #fff url(../img/icons/mJotv.gif) no-repeat right -10px center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 3px 18px 3px 7px;
+    /* Use the same right padding (18) in jQ! */
+    border-radius: 1px;
+    transition: background 0.4s;
+}
+
+.cdaterminalcoleta.x {
+    background-position: right 5px center;
+}
+
+
+/* (jQ) Show icon */
+
+.cdaterminalcoleta.onX {
+    cursor: pointer;
+}
+
+
+/* (jQ) hover cursor style */
+
+.cdaterminalcoleta::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.sda_terminal_coleta {
+    background: #fff url(../img/icons/mJotv.gif) no-repeat right -10px center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 3px 18px 3px 7px;
+    /* Use the same right padding (18) in jQ! */
+    border-radius: 1px;
+    transition: background 0.4s;
+}
+
+.sda_terminal_coleta.x {
+    background-position: right 5px center;
+}
+
+
+/* (jQ) Show icon */
+
+.sda_terminal_coleta.onX {
+    cursor: pointer;
+}
+
+
+/* (jQ) hover cursor style */
+
+.sda_terminal_coleta::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+
+/* Remove IE default X */
+
+.prev_cda_cliente {
+    background: #fff url(../img/icons/mJotv.gif) no-repeat right -10px center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 3px 18px 3px 7px;
+    /* Use the same right padding (18) in jQ! */
+    border-radius: 1px;
+    transition: background 0.4s;
+}
+
+.prev_cda_cliente.x {
+    background-position: right 5px center;
+}
+
+
+/* (jQ) Show icon */
+
+.prev_cda_cliente.onX {
+    cursor: pointer;
+}
+
+
+/* (jQ) hover cursor style */
+
+.prev_cda_cliente::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+
+/* Remove IE default X */
+
+.cda_cliente {
+    background: #fff url(../img/icons/mJotv.gif) no-repeat right -10px center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 3px 18px 3px 7px;
+    /* Use the same right padding (18) in jQ! */
+    border-radius: 1px;
+    transition: background 0.4s;
+}
+
+.cda_cliente.x {
+    background-position: right 5px center;
+}
+
+
+/* (jQ) Show icon */
+
+.cda_cliente.onX {
+    cursor: pointer;
+}
+
+
+/* (jQ) hover cursor style */
+
+.cda_cliente::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+
+/* Remove IE default X */
+
+.sda_cliente {
+    background: #fff url(../img/icons/mJotv.gif) no-repeat right -10px center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 3px 18px 3px 7px;
+    /* Use the same right padding (18) in jQ! */
+    border-radius: 1px;
+    transition: background 0.4s;
+}
+
+.sda_cliente.x {
+    background-position: right 5px center;
+}
+
+
+/* (jQ) Show icon */
+
+.sda_cliente.onX {
+    cursor: pointer;
+}
+
+
+/* (jQ) hover cursor style */
+
+.sda_cliente::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+
+/* Remove IE default X */
+
+.prev_cda_devolucao {
+    background: #fff url(../img/icons/mJotv.gif) no-repeat right -10px center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 3px 18px 3px 7px;
+    /* Use the same right padding (18) in jQ! */
+    border-radius: 1px;
+    transition: background 0.4s;
+}
+
+.prev_cda_devolucao.x {
+    background-position: right 5px center;
+}
+
+
+/* (jQ) Show icon */
+
+.prev_cda_devolucao.onX {
+    cursor: pointer;
+}
+
+
+/* (jQ) hover cursor style */
+
+.prev_cda_devolucao::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+.devolucao_vazio {
+    background: #fff url(../img/icons/mJotv.gif) no-repeat right -10px center;
+    border: 1px solid rgba(0, 0, 0, 0.5);
+    padding: 3px 18px 3px 7px;
+    /* Use the same right padding (18) in jQ! */
+    border-radius: 1px;
+    transition: background 0.4s;
+}
+
+.devolucao_vazio.x {
+    background-position: right 5px center;
+}
+
+
+/* (jQ) Show icon */
+
+.devolucao_vazio.onX {
+    cursor: pointer;
+}
+
+
+/* (jQ) hover cursor style */
+
+.devolucao_vazio::-ms-clear {
+    display: none;
+    width: 0;
+    height: 0;
+}
+
+
+/* Remove IE default X */

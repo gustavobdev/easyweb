@@ -1,0 +1,218 @@
+<style type="text/css">
+    table {
+        border: 1px solid #ccc;
+        background-color: #f8f8f8;
+        margin: 0;
+        padding: 3;
+        width: 100%;
+        table-layout: fixed;
+    }
+    
+    table .left {
+        position: absolute;
+        margin: left;
+    }
+    
+    table caption {
+        font-size: 1.0em;
+        margin: .5em 0 .75em;
+        text-transform: uppercase;
+    }
+    
+    table tr {
+        border: 1px solid #ddd;
+        padding: .35em;
+    }
+    
+    table th,
+    table td {
+        padding: .425em;
+        text-align: center;
+    }
+    
+    table th {
+        font-size: .85em;
+        letter-spacing: .1em;
+        text-transform: uppercase;
+    }
+    
+    @media screen and (max-width: 600px) {
+        table {
+            border: 0;
+        }
+        table caption {
+            font-size: 1.3em;
+        }
+        table thead {
+            border: none;
+            clip: rect(0 0 0 0);
+            height: 0.1px;
+            margin: -1px;
+            overflow: hidden;
+            padding: 0;
+            position: absolute;
+            width: 1px;
+        }
+        table tr {
+            border-bottom: 3px solid #ddd;
+            display: block;
+            margin-bottom: .425em;
+        }
+        table td {
+            border-bottom: 1px solid #ddd;
+            display: block;
+            font-size: .8em;
+            text-align: right;
+        }
+        table td::before {
+            /*
+    * aria-label has no advantage, it wont be read inside a table
+    content: attr(aria-label);
+    */
+            content: attr(data-label);
+            float: left;
+            font-weight: bold;
+            text-transform: uppercase;
+        }
+        table td:last-child {
+            border-bottom: 0;
+        }
+    }
+    /* general styling */
+    
+    body {
+        font-family: "Open Sans", sans-serif;
+        line-height: 1.25;
+    }
+</style>
+
+
+<div class="col-sm-12">
+    <div class="col-sm-6" style="float: right; position:  responsive; ">
+        <img src="%IMG%" width="150px" alt="image" />
+    </div>
+
+    <table style="width:30%">
+        <thead>
+            <tr>
+                <th scope="col">Ref/CTE</th>
+                <th scope="col">Data</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="Ref/CTE">%FRETID% / %REFCTE%</td>
+                <td data-label="Data">%DATA%</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>Informações do Frete</caption>
+        <thead>
+            <tr>
+                <th scope="col">QTD.VG</th>
+                <th scope="col">CONTROLE INTERNO</th>
+                <th scope="col">MODALIDE</th>
+                <th scope="col">CLIENTE/TRANSPORTADORA</th>
+                <th scope="col">REF.CLIENTE</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="QTD.VG">%QTDVG%</td>
+                <td data-label="CONTROLE INTERNO">%CONTINTERNO%</td>
+                <td data-label="MODALIDE">%MODALIDADE%</td>
+                <td data-label="CLIENTE/TRANSPORTADORA">%CTRANSP%</td>
+                <td data-label="REF.CLIENTE">%REFCLI%</td>
+            </tr>
+            <tr>
+                <th scope="col">TIPO</th>
+                <th scope="col">SIZE</th>
+                <th scope="col">TIPO</th>
+                <th scope="col">IMO</th>
+                <th scope="col">CONTAINER/QTE.LCL</th>
+            </tr>
+            <tr>
+                <td data-label="TIPO">%TIPO%</td>
+                <td data-label="SIZE">%SIZE%</td>
+                <td data-label="TIPO">%TIPO2%</td>
+                <td data-label="IMO">%IMO%</td>
+                <td data-label="CONTAINER/QTE.LCL">%CONTQTE%</td>
+            </tr>
+            <tr>
+                <th scope="col">RASTREADO</th>
+                <th scope="col">DI/DTA/NF</th>
+                <th scope="col">MARCADORIA/PRODUTO</th>
+                <th scope="col">PESO TOTAL</th>
+                <th scope="col">VALOR CIF R$</th>
+            </tr>
+            <tr>
+                <td data-label="RASTREADO">%RASTREADO%</td>
+                <td data-label="DI/DTA/NF">%DIDTANF%</td>
+                <td data-label="MARCADORIA/PRODUTO">%MERCPROD%</td>
+                <td data-label="PESO TOTAL">%PESOT%</td>
+                <td data-label="VALOR CIF R$">%VALCIF%</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>Informações do Motorista</caption>
+        <thead>
+            <tr>
+                <th scope="col">NOME</th>
+                <th scope="col">CPF</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td data-label="NOME">%NOME% %SOBRENOME%</td>
+                <td data-label="CPF">%CPF%</td>
+            </tr>
+            <tr>
+                <th scope="col">PLACA</th>
+                <th scope="col">RENAVAM</th>
+                <th scope="col">MODELO</th>
+                <th scope="col">COR</th>
+                <th scope="col">TIPO</th>
+            </tr>
+            <tr>
+                <td data-label="PLACA">%PLACA%</td>
+                <td data-label="RENAVAM">%RENAVAM%</td>
+                <td data-label="MODELO">%MODELO%</td>
+                <td data-label="COR">%COR%</td>
+                <td data-label="TIPO">%TIPOCAMIN%</td>
+            </tr>
+            <tr>
+                <th scope="col">PLACA REBOQUE</th>
+                <th scope="col">RENAVAM</th>
+                <th scope="col">TIPO REBOQUE</th>
+            </tr>
+            <tr>
+                <td data-label="DI/DTA/NF">%PLREB%</td>
+                <td data-label="MARCADORIA/PRODUTO">%RENAREB%</td>
+                <td data-label="PESO TOTAL">%TIPOREB%</td>
+            </tr>
+        </tbody>
+    </table>
+    <table>
+        <caption>Informações Operacionais</caption>
+        <thead>
+            <tr>
+                <th scope="col">CDA TERMINAL COLETA</th>
+                <th scope="col">SDA TERMINAL COLETA</th>
+                <th scope="col">CDA CLIENTE</th>
+                <th scope="col">SDA CLIENTE</th>
+                <th scope="col">DEV VAZIO/BEM. CHEIO</th>
+            </tr>
+        </thead>
+        <tbody>
+
+            <tr>
+                <td data-label="CDA TERMINAL COLETA">%CDATERM%</td>
+                <td data-label="SDA TERMINAL COLETA">%SDATERM%</td>
+                <td data-label="CDA CLIENTE">%CDACLI%</td>
+                <td data-label="SDA CLIENTE">%SDACLI%</td>
+                <td data-label="DEV VAZIO/BEM. CHEIO">%CHVAZ%</td>
+            </tr>
+        </tbody>
+    </table>

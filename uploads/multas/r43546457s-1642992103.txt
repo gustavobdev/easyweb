@@ -1,0 +1,79 @@
+***HOMEPAGE
+
+- Botão de enviar um email nao esta funcionando **Fazer integrando sistema de envio de emails
+
+- Formulários não estão funcionando  **Fazer integrando sistema de envio de emails
+
+- Ao clicar no logo da transdoni precisa cair na homepage **FEITO
+
+- Linkar corretamente os linkis das redes sociais do footer **FEITO**mentiroso
+
+- Acrescentar o link para conversa por whatsapp flutuante na homepage **FEITO** Mentiroso de novo
+
+- Tirar a animação do Menu lateral **FEITO
+
+****Login
+- Não esta retornando mensagem de erro no login **FEITO
+
+- O lembrar-me não está funcionando **FEITO
+
+- Traduiz o botão de login **FEITO
+
+_______________________
+CONSOLE
+***Quando abrir ocultar a barra lateral **FEITO
+_______________________
+
+****TELA INICIAL
+
+- Ajustar os itens de visualização **FEITO
+
+- Ao criar um CTE deve aparecer uma msg perguntando se eu realmente quero criar um CTE em branco. **FEITO
+
+- Buscar Frete **FEITO
+
+- Colocar os fretes em ordem ASC os ultimos 5 adicionados **FEITO
+
+
+
+
+****TELA DE EDIÇÃO DO FRETE
+
+- No status tirar o selected disable **FEITO
+
+- Colocar os itens do status na ordem dos processos **FEITO
+
+- Adicionar status "Aguarando Adiantamento" e "Aguardando Saldo" **FEITO
+
+- Trocar o "Origem CIDADE" por Origem **FEITO
+
+- Colocar como obrigatório Origem e Destino **FEITO
+
+- Limpar Autocomplete dos campos ** FEITO
+
+- Colocar as opções no tipo de transaçao (PIX, TED, DOC, DINHEIRO) **FEITO
+
+- A ordem das edições estão ao contrário [Colocar em ASC] ** FEITO
+
+- Ao dar o erro para gerar o PDF informar quais campos ainda precisam ser preenchidos **/complexo
+
+
+- Ajustar o Layout do botão atualizar operação da sessão de Informações operacionais  **FEITO
+
+- ARRUMAR ERRO NAS DATAS DE OPERAÇÃO **FEITO
+
+*** TELA DE CAMINHONEIROS 
+
+- Trocar o ícone de atualizar para duas setas rodando **FEITO
+
+
+**** FAZER TELA DE CLIENTES **FEITO
+
+
+**** MEMBROS DA EQUIPE
+
+- Trocar o ícone de atualizar para duas setas rodando **FEITO
+
+- Adiconar um botão que abra um modal para adicionar novos membros **FEITO
+
+
