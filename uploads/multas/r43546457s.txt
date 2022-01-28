@@ -1,0 +1,130 @@
+***CONSOLE
+
+
+****CONSOLE****
+
+***TELA PRINCIPAL 
+
+buscar cte pela ref/cte **FEITO
+
+Sistema de gestão de multas:
+Pagas, não pagas, inserir anexo da documentação(foto), gerar relatório de gastos.
+
+Tela para setor de faturamento, com detalhes de transação do cliente(saldo pendente).
+
+***TELA ADD MOTORISTA / MODAL CRIAR MOTORISTA(NA TELA CAMINHONEIROS)
+
+criar um campo na tabela motorista de status da conta **FEITO
+(
+ativo - conta ativa **FEITO
+
+bloqueado - conta inativa para quaisquer funções(lembrar de fazer filtro em todo o sistema)
+
+pendente de doc - Notifica o motorista sobre a regularização e o impede de ficar ativo para receber fretes(lembrar de fazer filtro em todo o sistema).
+
+ tirar input de senha e criar sistema de gerador de senha automática. **FEITO
+
+Ao criar motorista, envia um email com as informações de login, indicando que ele deve criar uma senha ao logar-se pela primeira vez. **FEITO
+
+Inserir input validade da CHN **FEITO
+(criar verificador para qundo estiver perto da data de vencto enviar uma notificação para o motorista)
+
+***TELA DE FRETES
+
+adicionar mais uma tabela para os fretes agendados(status agendado, que não será feito o transporte no dia).
+
+***TELA CAMINHONEIROS
+
+pesquisar pelo tipo de caminhão
+
+
+***TELA ADD CAMINHAO
+
+criar textarea obs do tipo de caminhão **feito
+
+criar input data de validade de licenciamento do doc (criar verificador para qundo estiver perto da data de vencto enviar uma notificação para o motorista)
+
+***TELA ADD REBOQUE
+
+criar input data de validade de licenciamento do doc (criar verificador para qundo estiver perto da data de vencto enviar uma notificação para o motorista)
+
+
+***TELA EDITFRETE 
+
+Ao colocar em transporte Datas operacionais, numero volume e numero reserva obrigatórias **FEITO
+
+no input agenciamento, adicionar ao select: Sobcontratação E Documental **FEITO
+
+*Candidaturas - adicionar informações do motorista (abrir modal com infos cadastrais) **FEITO
+
+
+Quando alterar o status para cancelado ou finalizado, inserir input disabled em todos os campos de edição, sumir com os botões submit, cancel e gerar pdf. **FEITO
+
+Ao colocar status em transporte, publica o tracking no site para pesquisa do cliente final, e envia o email para o mesmo avisando do status de transporte.
+
+Quando o usuário atualizar a rota do motorista na tela de editfrete (info operacionais), manda email atualizado para o cliente, sobre o andamento do frete.
+
+Adicionar status Agendado- ao selecionar status, enviar email para o cliente.
+
+Criar um textarea de observação do frete, jutamente com um campo na tabela de frentes [obs] 
+
+Mudar configuração de visualização dos campos origem/destino/retirada
+cada um em uma row, ao lado de cidade e uf um  input col-9 para detalhamento de cada um (para colocar endereço completo). **FEITO
+
+
+Transformar em datalist modal para buscar motorista e cliente. **FEITO
+
+
+
+
+
+****APLICATIVO****
+
+**MESSAGES AJAX
+Caixa de mensagens = grava as mensagens para exibir para  motorista na aba notificações, falta terminar a caixa de mensagens do usuário
+
+
+validade da CHN (criar verificador para qundo estiver perto da data de vencto enviar uma notificação para o motorista)
+
+***LOGA(LOGIN PELA PRIMEIRA VEZ)
+Fazer um search last login na tabela do motorista, se for vazio ou nulo abre uma tela parecida com a de login, com dois inputs - senha e confirmar senha, para primeiro login no app.
+
+***PERFIL
+Ao alterar a sessão para online, salvar no campo 'online' na tabela do motorista, como 1 = true, lembrar de tirar essa função do login e logout do motorista.
+
+ao enviar documentação cnh, entrar em modo de avaliação, caso for reprovada colocar uma obs
+
+Inserir link para modal de informações documentais(cnh/data de vencto cnh/cpf(tirar do principal)/rg)
+
+Inserir input validade da CHN, descrito acima (criar verificador para quando estiver perto da data de vencto enviar uma notificação para o motorista)
+
+***TELA ADD CAMINHAO
+
+criar input data de validade de licenciamento do doc (criar verificador para qundo estiver perto da data de vencto enviar uma notificação para o motorista)
+
+***TELA ADD REBOQUE
+
+criar input data de validade de licenciamento do doc (criar verificador para qundo estiver perto da data de vencto enviar uma notificação para o motorista)
+
+***TELA DE TIMELINE DO TRACKING
+
+Quando o motorista atualizar a rota na tela de tracking do app, manda email atualizado para o cliente, sobre o andamento do frete.
+
+Ao ativar o ckeckbox de chegada, aparecer opção para fazer upload de foto do local (retirada/origem/entrega e afins)
+
+Botão de pânico - Colocar um botão de pânico que ao clicar, abre uma pagina com lista de opções para reportar o problema (colocar uma observação destacada para que o motorista tenha certeza ao clicar, que a opção poderá gerar um falso alerta):
+
+Assalto: 
+(parte do motorista) - Ao clicar nesse botão, o motorista entra em uma tela de sessão bloqueada (tela vermelha) que terá um início de questionario com opções à serem selecionadas:
+Você está fora de perigo?
+1 - Não - Count de 6 minutos para aparecer um input da senha para sair da tela vermelha.
+2 - Sim - aparece um input para ele colocar a senha da conta e sair da tela vermelha.
+
+(parte do console) - Todos os usuários logados(à ser definido se será por nl_acesso ou nível específico) irão receber um alerta (com som) em forma de modal com o relatório da ocorrência, que ficará armazenado em um registro de ocorrências, em uma tela no console e no editfrete.
+
+
+Problemas com a carga - abrirá uma modal com caixa de observações para ele digitar o problema e botão para subir uma foto anexado a esse respectivo problema.
+
+Problemas com o veículo - abrirá uma modal com caixa de observações para ele digitar o problema e botão para subir uma foto anexado a esse respectivo problema.
+
+

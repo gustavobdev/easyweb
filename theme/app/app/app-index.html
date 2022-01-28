@@ -1,0 +1,1743 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Finapp - Mobile Template</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+    <meta name="viewport"
+        content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, viewport-fit=cover" />
+    <meta name="description" content="Finapp HTML Mobile Template">
+    <meta name="keywords" content="bootstrap, mobile template, cordova, phonegap, mobile, html, responsive" />
+    <link rel="apple-touch-icon" sizes="180x180" href="assets/img/apple-touch-icon.png">
+    <link rel="icon" type="image/png" href="assets/img/favicon.png" sizes="32x32">
+    <link rel="shortcut icon" href="assets/img/favicon.png">
+</head>
+
+<body>
+
+    <!-- loader -->
+    <div id="loader">
+        <img src="assets/img/logo-icon.png" alt="icon" class="loading-icon">
+    </div>
+    <!-- * loader -->
+
+    <!-- App Header -->
+    <div class="appHeader bg-primary text-light">
+        <div class="pageTitle">
+            <img src="assets/img/logo.png" alt="logo" class="logo">
+        </div>
+        <div class="right">
+            <a href="app-notifications.html" class="headerButton">
+                <ion-icon class="icon" name="notifications-outline"></ion-icon>
+                <span class="badge badge-danger">4</span>
+            </a>
+        </div>
+    </div>
+    <!-- * App Header -->
+
+
+    <!-- App Capsule -->
+    <div id="appCapsule">
+
+        <!-- Wallet Card -->
+        <div class="section wallet-card-section pt-1">
+            <div class="wallet-card">
+                <!-- Balance -->
+                <div class="balance">
+                    <div class="left">
+                        <span class="title">Meu carro</span>
+                        <h1 class="total" id="meuCarro">-</h1>
+                    </div>
+                    <div class="right">
+                        <a href="#" class="button" data-toggle="modal" onclick="seleMarcas()" data-target="#depositActionSheet" id="carregaMarca">
+                            <ion-icon name="add-outline"></ion-icon>
+                        </a>
+                        <script>
+                            function seleMarcas(){
+                                var request = new XMLHttpRequest()
+
+                                request.open('GET', "http://fipeapi.appspot.com/api/1/carros/marcas.json", true)
+                                request.onload = function() {
+                                // Begin accessing JSON data here
+                                var data = JSON.parse(this.response)
+
+                                if (request.status >= 200 && request.status < 400) {
+                                    var arrumado  = "<option value=''></option>"
+                                    data.forEach(qualquer =>  {
+                                    arrumado += "<option value='"+qualquer.id+"'> "+qualquer.name+"</option>";
+                                    })
+                                                                                            
+                                    document.getElementById("marca").innerHTML = arrumado; 
+
+                                } else {
+                                    console.log('error')
+                                }
+                                }
+
+                                request.send()
+                                }     
+                            
+                           
+                        </script>
+                    </div>
+                </div>
+                <!-- * Balance -->
+                
+            </div>
+        </div>
+        <!-- Wallet Card -->
+
+        <!-- Deposit Action Sheet -->
+        <div class="modal fade action-sheet" id="depositActionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Adicionar veículo</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="account1">Marca</label>
+                                        <select class="form-control custom-select" id="marca" onchange="seleMarca(this.value)">
+                                            <option value=""> </option>
+                                            
+                                            
+                                        </select>
+                                    </div>
+                                </div>                                
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="account1">Modelo</label>
+                                        <select class="form-control custom-select" id="modelo" onchange="seleAno(this.value)">
+
+                                            
+                                            <script>
+                                                function seleMarca(el){
+                                                    var request = new XMLHttpRequest()
+
+                                                    request.open('GET', "http://fipeapi.appspot.com/api/1/carros/veiculos/"+el+".json", true)
+                                                    request.onload = function() {
+                                                    // Begin accessing JSON data here
+                                                    var data = JSON.parse(this.response)
+
+                                                    if (request.status >= 200 && request.status < 400) {
+                                                        var arrumado  = "<option value=''></option>"
+                                                        data.forEach(qualquerai =>  {
+                                                        arrumado += "<option value='"+qualquerai.id+"'> "+qualquerai.name+"</option>";
+                                                        })
+                                                                                                                
+                                                        document.getElementById("modelo").innerHTML = arrumado; 
+
+                                                    } else {
+                                                        console.log('error')
+                                                    }
+                                                    }
+                                                    request.send()
+                                                    }     
+                                            </script>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="account1">Ano</label>
+                                        <select class="form-control custom-select" id="ano">                                            
+                                            <script>
+                                                function seleAno(el){
+                                                    var request = new XMLHttpRequest()
+
+                                                    request.open('GET', "http://fipeapi.appspot.com/api/1/carros/veiculo/"+$("#marca").val()+"/"+el+".json", true)
+                                                    request.onload = function() {
+                                                    // Begin accessing JSON data here
+                                                    var data = JSON.parse(this.response)
+
+                                                    if (request.status >= 200 && request.status < 400) {
+                                                        var arrumado  = "<option value=''></option>"
+                                                        data.forEach(qualquerai =>  {
+                                                        arrumado += "<option value='"+qualquerai.id+"'> "+qualquerai.id.substring(0, qualquerai.id.length - 2)+"</option>";
+                                                        })
+                                                                                          
+                                                        document.getElementById("ano").innerHTML = arrumado; 
+
+                                                    } else {
+                                                        console.log('error')
+                                                    }
+                                                    }
+                                                    request.send()
+                                                    }     
+                                            </script>
+                                            
+                                        </select>
+                                    </div>
+                                </div>
+    
+                                <div class="form-group basic">
+                                    <button type="button" class="item btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal" onclick="pegaCarro()"  data-toggle="modal" >Usar este</button>                                        
+                                </div>
+                                
+                                <script>
+                                    function pegaCarro(){
+
+                                        var Codmodelo = $("#modelo").val()
+                                        var Codmarca = $("#marca").val()
+                                        var Ano = $("#ano").val()
+
+                                        var request = new XMLHttpRequest()
+
+                                        request.open('GET', "http://fipeapi.appspot.com/api/1/carros/veiculo/"+Codmarca+"/"+Codmodelo+"/"+Ano+"-1.json", true)
+                                        request.onload = function() {
+                                        // Begin accessing JSON data here
+                                        var data = JSON.parse(this.response)
+
+                                        if (request.status >= 200 && request.status < 400) {
+                                            {                                            
+                                            $("#combustivel").text(data.combustivel)
+                                            $("#anoDash").text(data.ano_modelo)
+                                            $("#valor").text(data.preco)
+                                            $("#marcaDash").text(data.marca)
+                                            $("#meuCarro").text(data.name)
+                                            }
+                                                                                                    
+                                        
+                                        } else {
+                                            console.log('error')
+                                        }
+                                        }
+                                        request.send()
+                                        }     
+
+                                </script>
+
+
+
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Deposit Action Sheet -->
+
+        <!-- Withdraw Action Sheet -->
+        <div class="modal fade action-sheet" id="withdrawActionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Withdraw</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="account2d">From</label>
+                                        <select class="form-control custom-select" id="account2d">
+                                            <option value="0">Savings (*** 5019)</option>
+                                            <option value="1">Investment (*** 6212)</option>
+                                            <option value="2">Mortgage (*** 5021)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="text11d">To</label>
+                                        <input type="email" class="form-control" id="text11d" placeholder="Enter IBAN">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle"></ion-icon>
+                                        </i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <label class="label">Enter Amount</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="input14d">$</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-lg" placeholder="0">
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Withdraw Action Sheet -->
+
+        <!-- Send Action Sheet -->
+        <div class="modal fade action-sheet" id="sendActionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Send Money</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="account2">From</label>
+                                        <select class="form-control custom-select" id="account2">
+                                            <option value="0">Savings (*** 5019)</option>
+                                            <option value="1">Investment (*** 6212)</option>
+                                            <option value="2">Mortgage (*** 5021)</option>
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <div class="input-wrapper">
+                                        <label class="label" for="text11">To</label>
+                                        <input type="email" class="form-control" id="text11"
+                                            placeholder="Enter bank ID">
+                                        <i class="clear-input">
+                                            <ion-icon name="close-circle"></ion-icon>
+                                        </i>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <label class="label">Enter Amount</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="input14">$</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-lg" placeholder="0">
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Send</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Send Action Sheet -->
+
+        <!-- Exchange Action Sheet -->
+        <div class="modal fade action-sheet" id="exchangeActionSheet" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Exchange</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="row">
+                                    <div class="col-6">
+                                        <div class="form-group basic">
+                                            <div class="input-wrapper">
+                                                <label class="label" for="currency1">From</label>
+                                                <select class="form-control custom-select" id="currency1">
+                                                    <option value="1">EUR</option>
+                                                    <option value="2">USD</option>
+                                                    <option value="3">AUD</option>
+                                                    <option value="4">CAD</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <div class="col-6">
+                                        <div class="form-group basic">
+                                            <div class="input-wrapper">
+                                                <label class="label" for="currency2">To</label>
+                                                <select class="form-control custom-select" id="currency2">
+                                                    <option value="1">USD</option>
+                                                    <option value="1">EUR</option>
+                                                    <option value="2">AUD</option>
+                                                    <option value="3">CAD</option>
+                                                </select>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <div class="form-group basic">
+                                    <label class="label">Enter Amount</label>
+                                    <div class="input-group mb-2">
+                                        <div class="input-group-prepend">
+                                            <span class="input-group-text" id="input1">$</span>
+                                        </div>
+                                        <input type="text" class="form-control form-control-lg" value="100">
+                                    </div>
+                                </div>
+
+
+
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Deposit</button>
+                                </div>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Exchange Action Sheet -->
+
+        <!-- Stats -->
+        <div class="section">
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="stat-box">
+                        <div class="title">Valor FIPE</div>
+                        <div class="value text-success" style="font-size: 22px;" id="valor"></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="stat-box">
+                        <div class="title">Ano</div>
+                        <div class="value text-danger" id="anoDash" ></div>
+                    </div>
+                </div>
+            </div>
+            <div class="row mt-2">
+                <div class="col-6">
+                    <div class="stat-box">
+                        <div class="title">Combustível</div>
+                        <div class="value" id="combustivel"></div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="stat-box">
+                        <div class="title">Marca </div>
+                        <div class="value" id="marcaDash"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- * Stats -->
+
+        <!-- Check List -->
+        <div class="section mt-2 mb-2">
+            <div class="section-title">Revisão</div>
+            <div class="card">
+                <ul class="listview simple-listview transparent flush">
+                    <!--Pneus-->
+                    <li style="border-top-left-radius: 10px;  border-top-right-radius: 10px;">                       
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetForm">
+                            <div class="in">
+                                <div>Pneus</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox"  name="linhaf" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch1">
+                            <label class="custom-control-label" for="customSwitch1"></label>
+                        </div>
+                    </li>             
+                    <li id="linhaf" style="display: none;" >                       
+                       <h5>Revisão em: 456854 km</h5>                    
+                    <h4 class="text-right text-danger" id="mediafvalor"> Em dia </h4> 
+                    </li>
+                    <!-- Fim Pneus -->
+                    
+                    <!--Palhetas-->
+                    <li>                       
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetFormpi">
+                            <div class="in">
+                                <div>Palhetas</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox"  name="linhapi" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch30">
+                            <label class="custom-control-label" for="customSwitch30"></label>
+                        </div>
+                    </li>             
+                    <li id="linhapi" style="display: none;" >                       
+                        <h5>Revisão em: 456854 km</h5>                        
+                       <h4 class="text-right text-danger" id="valortotalf"> Em dia </h4> 
+                    </li>
+                    <!-- Fim Palhetas -->
+
+
+                    <!-- Lanternas -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetForms">
+                            <div class="in">
+                                <div>Lanternas</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox"  name="totals" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch2">
+                            <label class="custom-control-label" for="customSwitch2"></label>
+                        </div>
+                    </li>
+                    <li id="totals" style="display: none;" >                       
+                        <h5>Revisão em: 456854 km</h5>            
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!--Fim Lanternas -->
+
+                    <!-- Filtro -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetFormf">
+                            <div class="in">
+                                <div>Filtro</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="totalf" onclick="mostraLinha(this.name)"  class="custom-control-input" id="customSwitch3">
+                            <label class="custom-control-label" for="customSwitch3"></label>
+                        </div>
+                    </li>
+                    <li id="totalf" style="display: none;" >                       
+                        <h5>Revisão em: 456854 km</h5>                 
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!-- Fim Filtro -->
+
+                    <!-- Bateria -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetFormv">
+                            <div class="in">
+                                <div>Bateria</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox"  name="totalv" onclick="mostraLinha(this.name)"  class="custom-control-input" id="customSwitch4">
+                            <label class="custom-control-label" for="customSwitch4"></label>
+                        </div>
+                    </li>
+                    <li id="totalv" style="display: none;" >                       
+                        <h5>Revisão em: 456854 km</h5>              
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!-- Fim Bateria -->
+
+                    <!-- Câmbio -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetFormt">
+                            <div class="in">
+                                <div>Câmbio</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="totalt" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch5">
+                            <label class="custom-control-label" for="customSwitch5"></label>
+                        </div>
+                    </li>
+                    <li id="totalt" style="display: none;" >                       
+                        <h5>Revisão em: 456854 km</h5>                    
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!-- Fim Câmbio -->
+
+                    <!-- Diferencial (4x4) -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetFormm">
+                            <div class="in">
+                                <div>Diferencial (4x4) </div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="totalm" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch6">
+                            <label class="custom-control-label" for="customSwitch6"></label>
+                        </div>
+                    </li>
+                    <li id="totalm" style="display: none;" >                       
+                        <h4>Revisão em: 456854 km</ion-icon></h4>                    
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!-- Fim Diferencial (4x4) -->
+
+                    <!-- Óleo do motor -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetForma">
+                            <div class="in">
+                                <div>Óleo do motor</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="totala" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch7">
+                            <label class="custom-control-label" for="customSwitch7"></label>
+                        </div>
+                    </li>
+                    <li id="totala" style="display: none;" >                       
+                        <h4>Revisão em: 456854 km</ion-icon></h4>                    
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!-- Fim Óleo do motor -->
+
+                    <!-- Direção -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetForma">
+                            <div class="in">
+                                <div>Direção</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="totala" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch7">
+                            <label class="custom-control-label" for="customSwitch7"></label>
+                        </div>
+                    </li>
+                    <li id="totala" style="display: none;" >                       
+                        <h4>Revisão em: 456854 km</ion-icon></h4>                    
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!-- Fim Direção -->
+
+                    <!-- Freios -->
+                    <li>
+                        <a href="#" class="item" data-toggle="modal" data-target="#actionSheetForma">
+                            <div class="in">
+                                <div>Freios</div>
+                            </div>
+                        </a>                        
+                        <div class="custom-control custom-switch">
+                            <input type="checkbox" name="totala" onclick="mostraLinha(this.name)" class="custom-control-input" id="customSwitch7">
+                            <label class="custom-control-label" for="customSwitch7"></label>
+                        </div>
+                    </li>
+                    <li id="totala" style="display: none;" >                       
+                        <h4>Revisão em: 456854 km</ion-icon></h4>                    
+                        <h4 class="text-right text-danger">Em dia </h4> 
+                    </li>
+                    <!-- Fim Freios -->
+
+                </ul>
+            </div>
+        </div>
+        <!-- Fim Check List -->
+
+        <!-- Resumo -->
+        <div class="section mt-2">
+            <div class="section-title">Resumo</div>
+            <div class="card">
+                <div class="table-responsive">
+                    <table class="table rounded">
+                        <thead>
+                            <tr>                               
+                                <th scope="col">Descrição</th>
+                                <th scope="col" class="text-right">Valor</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>                                
+                                <td>Valor mínimo venda</td>
+                                <td class="text-right text-success">R$ 0,00</td>
+                            </tr>
+                            <tr>                                
+                                <td>Gastos com Reparos</td>
+                                <td class="text-right text-danger" id="reparos">R$ 0,00</td>
+                            </tr>
+                            <tr>                                
+                                <td>Gasto Operaionais</td>
+                                <td class="text-right text-danger">R$ 0,00</td>
+                            </tr>
+                            <tr>                                
+                                <td>Impostos</td>
+                                <td class="text-right text-danger">R$ 0,00</td>
+                            </tr>
+                            <tr>                                
+                                <td>Margem da Loja</td>
+                                <td class="text-right text-danger">R$ 0,00</td>
+                            </tr>
+                            <tr>                                
+                                <td>Valor ideal de compra</td>
+                                <td class="text-right text-primary">R$ 0,00</td>
+                            </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Resumo -->
+
+        <!-- Modal Pneus -->
+        <div class="modal fade action-sheet" id="actionSheetForm" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pneus</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    A durabilidade também pode variar de maneira importante em função da topografia da cidade. Para uma cidade como São Paulo (SP), os pneus podem durar entre 70 mil km e 100 mil km, enquanto que para uma cidade com topografia irregular como Belo Horizonte (MG), os pneus podem durar entre 40 mil km e 50 mil km quilômetros
+                                </div>
+                                
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                    data-dismiss="modal" nome="mediaf" onclick="adicionaItem(this.nome)">Trocar Pneu
+                                    </button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Pneus -->
+
+        <!-- Modal Pintura -->
+        <div class="modal fade action-sheet" id="actionSheetFormpi" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pintura</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="wallet-card">
+                                        <!-- Balance -->
+                                        <div class="balance">
+                                            <div class="right">
+                                                <a onclick="subtrai(this.name),rempi(this.name)" name="media1"  href="#" class="button" data-toggle="modal" data-target="#" id="subpi">
+                                                    <ion-icon name="remove-circle"></ion-icon>
+                                                </a>
+                                            </div>
+                                            <h1 id="media1">0</h1>
+                                            <div class="right">
+                                                <a onclick="soma(this.name),pluspi(this.name)" name="media1" href="#" class="button" data-toggle="modal" data-target="#" id="sompi">
+                                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- * Balance -->
+                                    </div>
+                                </div>
+
+                                <div class="section full mb-3">
+                                    <div class="section-title">Fotos</div>
+                        
+                                    <div class="carousel-multiple owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInputf1" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInputf1">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Carregar imagem</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInputf2" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInputf2">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Carregar imagem</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInputf3" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInputf3">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Carregar imagem</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <!-- Balance -->
+                                    <div class="row">
+                                        <h1 >R$ </h1> <h1 id="media1total"> 0</h1><h1> ,00</h1>
+                                    </div>
+                                    <!-- * Balance -->
+                                </div>
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal" nome="" onclick="adicionaItem(this.nome)" >Adicionar Item</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Pintura -->
+
+        <!-- Modal Pneus -->
+        <div class="modal fade action-sheet" id="actionSheetForms" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Pneus</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="card-body">
+
+                                    <div class="btn-group btn-group-toggle" data-toggle="buttons">
+                                        <label class="btn btn-outline-primary active">
+                                            <input type="radio" name="options1" id="option1a" checked>13"
+                                        </label>
+                                        <label class="btn btn-outline-primary">
+                                            <input type="radio" name="options1" id="option2a"> 14"
+                                        </label>
+                                        <label class="btn btn-outline-primary">
+                                            <input type="radio" name="options1" id="option3a"> 15"
+                                        </label>
+                                        <label class="btn btn-outline-primary">
+                                            <input type="radio" name="options1" id="option4a"> 16"
+                                        </label>
+                                        <label class="btn btn-outline-primary">
+                                            <input type="radio" name="options1" id="option4a"> 17"
+                                        </label>
+                                        <label class="btn btn-outline-primary">
+                                            <input type="radio" name="options1" id="option4a"> 18"
+                                        </label>
+                                    </div>
+                                </div>    
+
+                                <div class="form-group basic">
+                                    <div class="wallet-card">
+                                        <!-- Balance -->
+                                        <div class="balance">
+                                            <div class="right">
+                                                <a onclick="subtrai(this.name),remp(this.name)" name="media2"  class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="remove-circle"></ion-icon>
+                                                </a>
+                                            </div>
+                                            <h1 id="media2">0</h1>
+                                            <div class="right">
+                                                <a onclick="soma(this.name),plusp(this.name)" name="media2" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- * Balance -->
+                                    </div>
+                                </div>
+
+                                <div class="section full mb-3">
+                                    <div class="section-title">Fotos</div>
+                        
+                                    <div class="carousel-multiple owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <!-- Balance -->
+                                    <div class="row">
+                                        <h1 >R$ </h1> <h1 id="media2total"> 0</h1><h1> ,00</h1>
+                                    </div>
+                                    <!-- * Balance -->
+                                </div>
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Adicionar item</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim modal pneus -->
+
+        <!-- Modal Faróis -->
+        <div class="modal fade action-sheet" id="actionSheetFormf" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Faróis e Lanternas</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="wallet-card">
+                                        <!-- Balance -->
+                                        <div class="balance">
+                                            <div class="right">
+                                                <a onclick="subtrai(this.name),reml(this.name)" name="media3" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="remove-circle"></ion-icon>
+                                                </a>
+                                            </div>
+                                            <h1 id="media3">0</h1>
+                                            <div class="right">
+                                                <a onclick="soma(this.name),plusl(this.name)" name="media3" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- * Balance -->
+                                    </div>
+                                </div>
+
+                                <div class="section full mb-3">
+                                    <div class="section-title">Fotos</div>
+                        
+                                    <div class="carousel-multiple owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <!-- Balance -->
+                                    <div class="row">
+                                        <h1 >R$ </h1> <h1 id="media3total"> 0</h1><h1> ,00</h1>
+                                    </div>
+                                    <!-- * Balance -->
+                                </div>
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Adicionar item</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Faróis -->
+
+         <!-- Modal Vidros -->
+         <div class="modal fade action-sheet" id="actionSheetFormv" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Vidros</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="wallet-card">
+                                        <!-- Balance -->
+                                        <div class="balance">
+                                            <div class="right">
+                                                <a onclick="subtrai(this.name),remv(this.name)" name="media4" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="remove-circle"></ion-icon>
+                                                </a>
+                                            </div>
+                                            <h1 id="media4">0</h1>
+                                            <div class="right">
+                                                <a onclick="soma(this.name),plusl(this.name)" name="media4" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- * Balance -->
+                                    </div>
+                                </div>
+
+                                <div class="section full mb-3">
+                                    <div class="section-title">Fotos</div>
+                        
+                                    <div class="carousel-multiple owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <!-- Balance -->
+                                    <div class="row">
+                                        <h1 >R$ </h1> <h1 id="media4total"> 0</h1><h1> ,00</h1>
+                                    </div>
+                                    <!-- * Balance -->
+                                </div>
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Adicionar item</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Vidros -->
+
+        <!-- Modal Tapeceria -->
+        <div class="modal fade action-sheet" id="actionSheetFormt" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Tapeceria</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="wallet-card">
+                                        <!-- Balance -->
+                                        <div class="balance">
+                                            <div class="right">
+                                                <a onclick="subtrai(this.name),remt(this.name)" name="media5" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="remove-circle"></ion-icon>
+                                                </a>
+                                            </div>
+                                            <h1 id="media5">0</h1>
+                                            <div class="right">
+                                                <a onclick="soma(this.name),plust(this.name)" name="media5" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- * Balance -->
+                                    </div>
+                                </div>
+
+                                <div class="section full mb-3">
+                                    <div class="section-title">Fotos</div>
+                        
+                                    <div class="carousel-multiple owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <!-- Balance -->
+                                    <div class="row">
+                                        <h1 >R$ </h1> <h1 id="media5total"> 0</h1><h1> ,00</h1>
+                                    </div>
+                                    <!-- * Balance -->
+                                </div>
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Adicionar item</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!--  Fim Modal Tapeceria-->
+
+        <!-- Modal Mecanica -->
+        <div class="modal fade action-sheet" id="actionSheetFormm" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Mecânica</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="wallet-card">
+                                        <!-- Balance -->
+                                        <div class="balance">
+                                            <div class="right">
+                                                <a onclick="subtrai(this.name),remm(this.name)" name="media6"  class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="remove-circle"></ion-icon>
+                                                </a>
+                                            </div>
+                                            <h1 id="media6">0</h1>
+                                            <div class="right">
+                                                <a onclick="soma(this.name),plusm(this.name)" name="media6"  class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- * Balance -->
+                                    </div>
+                                </div>
+
+                                <div class="section full mb-3">
+                                    <div class="section-title">Fotos</div>
+                        
+                                    <div class="carousel-multiple owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                <!-- Balance -->
+                                <div class="row">
+                                <h1 >R$ </h1> <h1 id="media6total"> 0</h1><h1> ,00</h1>
+                                </div>
+                                <!-- * Balance -->
+                                </div>
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Adicionar item</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Mecanica -->
+
+         <!-- Modal Ar condicionado -->
+         <div class="modal fade action-sheet" id="actionSheetForma" tabindex="-1" role="dialog">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title">Mecânica</h5>
+                    </div>
+                    <div class="modal-body">
+                        <div class="action-sheet-content">
+                            <form>
+                                <div class="form-group basic">
+                                    <div class="wallet-card">
+                                        <!-- Balance -->
+                                        <div class="balance">
+                                            <div class="right">
+                                                <a onclick="subtrai(this.name),rema(this.name)" name="media7" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="remove-circle"></ion-icon>
+                                                </a>
+                                            </div>
+                                            <h1 id="media7">0</h1>
+                                            <div class="right">
+                                                <a onclick="soma(this.name),plusa(this.name)" name="media7" class="button" data-toggle="modal" data-target="#" id="">
+                                                    <ion-icon name="add-circle-outline"></ion-icon>
+                                                </a>
+                                            </div>
+                                        </div>
+                                        <!-- * Balance -->
+                                    </div>
+                                </div>
+
+                                <div class="section full mb-3">
+                                    <div class="section-title">Fotos</div>
+                        
+                                    <div class="carousel-multiple owl-carousel owl-theme">
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                        <div class="item">
+                                            <div class="card">
+                                                <div class="card-body" style="padding: 10px;">
+                                                    <form>
+                                                        <div class="custom-file-upload">
+                                                            <input type="file" id="fileuploadInput" accept=".png, .jpg, .jpeg">
+                                                            <label for="fileuploadInput">
+                                                                <span>
+                                                                    <strong>
+                                                                        <ion-icon name="arrow-up-circle-outline"></ion-icon>
+                                                                        <i>Upload a Picture</i>
+                                                                    </strong>
+                                                                </span>
+                                                            </label>
+                                                        </div>
+                                
+                                                    </form>
+                                
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="form-group basic">
+                                    <!-- Balance -->
+                                    <div class="row">
+                                    <h1 >R$ </h1> <h1 id="media7total"> 0</h1><h1> ,00</h1>
+                                    </div>
+                                    <!-- * Balance -->
+                                </div>
+                                <div class="form-group basic">
+                                    <button type="button" class="btn btn-primary btn-block btn-lg"
+                                        data-dismiss="modal">Adicionar item</button>
+                                </div>
+                            </form>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <!-- Fim Modal Ar condicionado -->
+      
+
+
+        
+
+
+     
+
+    </div>
+    <!-- * App Capsule -->
+
+
+    <!-- App Bottom Menu -->
+    <div class="appBottomMenu">
+        <a href="app-index.html" class="item active">
+            <div class="col">
+                <ion-icon name="car"></ion-icon>
+                <strong>Meu veículo</strong>
+            </div>
+        </a>
+        <a href="app-pages.html" class="item">
+            <div class="col">
+                <ion-icon name="map"></ion-icon>
+                <strong>Oficinas</strong>
+            </div>
+        </a>
+        <a href="app-cards.html" class="item">
+            <div class="col">
+                <ion-icon name="card-outline"></ion-icon>
+                <strong>Health Card</strong>
+            </div>
+        </a>
+        <a href="app-mktPlace.html" class="item">
+            <div class="col">
+                <ion-icon name="cart"></ion-icon>
+                <strong>Marketplace</strong>
+            </div>
+        </a>
+        <a href="app-settings.html" class="item">
+            <div class="col">
+                <ion-icon name="person"></ion-icon>
+                <strong>Minha conta</strong>
+            </div>
+        </a>
+    </div>
+    <!-- * App Bottom Menu -->
+
+     <!--Funções desta tela-->
+     <script>
+        function mostraLinha(el){                      
+        var linha = document.getElementById(el).style.display;
+        if(linha == "none")                                   
+            document.getElementById(el).style.display = "flex";                          
+        else
+            document.getElementById(el).style.display = "none";
+        }
+
+        function soma(el){            
+            var media = parseInt(document.getElementById(el).innerText)
+            media = media + 1;            
+            document.getElementById(el).innerText = media
+        }
+
+        function subtrai(el){
+            var media = parseInt(document.getElementById(el).innerText)
+            if(media >= 1){
+                media = media - 1;
+            }            
+            document.getElementById(el).innerText = media
+        }
+
+        function plusf(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            valor = valor + 70
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function remf(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            if(valor >= 70){
+                valor = valor - 70;
+            }
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function pluspi(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            valor = valor + 180
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function rempi(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            if(valor >= 180){
+                valor = valor - 180;
+            }
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function plusp(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            valor = valor + 279
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function remp(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            if(valor >= 279){
+                valor = valor - 279;
+            }
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function plusl(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            valor = valor + 500
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function reml(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            if(valor >= 500){
+                valor = valor - 500;
+            }
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function plust(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            valor = valor + 500
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function remt(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            if(valor >= 500){
+                valor = valor - 500;
+            }
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function plusm(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            valor = valor + 500
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function remm(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            if(valor >= 500){
+                valor = valor - 500;
+            }
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function plusa(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            valor = valor + 500
+            document.getElementById(el + "total").innerText = valor
+        }
+
+        function rema(el){
+            var valor = parseInt(document.getElementById(el + "total").innerText)
+            if(valor >= 500){
+                valor = valor - 500;
+            }
+            document.getElementById(el + "total").innerText = valor
+        }
+        
+        function adicionaItem(el){
+            console.log(el)
+            var resultado = parseInt(document.getElementById(el + "total").innerText)
+            document.getElementById(el + "valor").innerText = resultado
+        }
+    </script>
+    <!--fim Funções desta tela-->   
+
+    <!-- ///////////// Js Files ////////////////////  -->
+    <!-- Jquery -->
+    <script src="assets/js/lib/jquery-3.4.1.min.js"></script>
+    <!-- Bootstrap-->
+    <script src="assets/js/lib/popper.min.js"></script>
+    <script src="assets/js/lib/bootstrap.min.js"></script>
+    <!-- Ionicons -->
+    <script src="https://unpkg.com/ionicons@5.0.0/dist/ionicons.js"></script>
+    <!-- Owl Carousel -->
+    <script src="assets/js/plugins/owl-carousel/owl.carousel.min.js"></script>
+    <!-- Base Js File -->
+    <script src="assets/js/base.js"></script>
+
+    
+
+</body>
+
+</html>

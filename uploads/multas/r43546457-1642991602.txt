@@ -1,0 +1,54 @@
+***HOMEPAGE
+
+- Botão de enviar um email nao esta funcionando **Fazer integrando sistema de envio de emails
+
+- Formulários não estão funcionando  **Fazer integrando sistema de envio de emails
+
+- Linkar corretamente os linkis das redes sociais do footer
+
+- Acrescentar o link para conversa por whatsapp flutuante na homepage *** Falta colocar o numero certo
+
+- Acrescentar o link para conversa por whatsapp flutuante na homepage
+
+
+_______________________
+CONSOLE
+
+-- Itens de visualização manter as obs tudo em uma linha só **FEITO
+
+- Buscar Frete concatenar a busca com o id do cte **FEITO
+
+- Colocar como obrigatório Origem e Destino **FEITO
+
+- Faltou o select do tipo de transação o adiantamento **FEITO
+
+- Ajustar o Layout do botão atualizar operação da sessão de Informações operacionais,ALINHAR **FEITO
+
+- A ordem das edições estão ao contrário [Colocar em ASC] ** REVISAR
+
+- Ao dar o erro para gerar o PDF informar quais campos ainda precisam ser preenchidos **/complexo
+
+(((ATENÇAO))) Quando salvar e dar o retorno de erro nao pode limpar os campos ja preenchidos
+
+
+
+_______________________
+*** TELA DE CAMINHONEIROS 
+
+- Trocar o ícone de atualizar para duas setas rodando **ERRO AO ATUALIZAR!!! **FEITO
+
+_______________________
+CLIENTE 
+
+- erro ao atualizar. Nao salva o CNPJ **FEITO
+
+_______________________
+MEMBROS
+
+- Ao salvar esta redirecionando para outra tela **FEITO
+
+- Ao adicionar deve voltar para a tela de membros e nao para a tela principal da aplicação **FEITO
+
+------GERAL
+Adicionar um atalho para novo registro em todas as entiades **FEITO
+
