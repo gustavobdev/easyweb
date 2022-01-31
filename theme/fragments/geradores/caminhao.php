@@ -29,9 +29,9 @@ messageDash();
                             <div class="tab-pane fade show active" id="tab4" role="tabpanel">
                                 <div class="row mb-3">
                                     <div class="col-3">
-                                        <label class="form-label" for="inputUsername">Motorista</label>
-                                        <input type="search" name="motorista" class="form-control" id="inputUsername" list="motorista">
-                                        <datalist name="motorista" id="motorista">
+                                        <label class="form-label" for="motoristas">Motorista</label>
+                                        <input type="search" name="motorista" class="form-control" id="motoristas" list="motorista">
+                                        <datalist id="motorista">
                                             <?php
                                             foreach ($motoristas as $motorista) :
                                             ?>

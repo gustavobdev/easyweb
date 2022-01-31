@@ -6,6 +6,8 @@ use Source\Models\Frete;
 use Source\Models\Log_Fretes;
 use Source\Models\Motorista;
 use Source\Models\Reboque;
+use Source\Models\Relacao_Caminhao;
+use Source\Models\Relacao_Reboque;
 
 $router = new Router(URL_BASE);
 
@@ -22,14 +24,15 @@ $motorista_banco = (new Motorista())->find("id = :mid", "mid={$frete->motorista}
 $caminhao_post = (new Caminhao())->findById("{$data["caminhao"]}");
 $caminhao_banco = (new Caminhao())->find("id = :cid", "cid={$motorista_banco[0]->id_caminhao}")->fetch(true);
 
-$reboque_post = (new Reboque())->findById("{$data["reboque"]}");
+if(isset($data["reboque"])):
+$reboque_post = (new Reboque())->find("id = :rid","rid={$data["reboque"]}")->fetch(true);
+endif;
 $reboque_banco = (new Reboque())->find("id = :cid", "cid={$motorista_banco[0]->id_reboque}")->fetch(true);
-
 
 $dados_post = array(
     "Motorista" => $motorista->nome . " " . $motorista->sobrenome,
     "Caminhao" => "Renavam: " . $caminhao_post->renavam_caminhao . " Modelo: " . $caminhao_post->modelo,
-    "Reboque" => "Placa: " . $reboque_post->placa_reboque . " Tipo: " . $reboque_post->tipo_reboque
+    $reboque_post ? "\"Reboque\" => \"Placa: \"" . $reboque_post[0]->placa_reboque . "\" Tipo: \"" . $reboque_post[0]->tipo_reboque : 'Vazio'
 
 );
 
@@ -47,9 +50,15 @@ $frete->save();
 
 
 if ($motorista) {
+    $relacao_caminhao = (new Relacao_Caminhao())->findById("{$data["caminhao"]}");
 
-    $motorista->id_caminhao = $data["caminhao"];
-    $motorista->id_reboque = $data["reboque"];
+    $motorista->id_caminhao = $relacao_caminhao->id_caminhao;
+
+    if($data["reboque"]):
+        $relacao_reboque = (new Relacao_Reboque())->findById("{$data["reboque"]}");
+
+    $motorista->id_reboque = $relacao_reboque->id_reboque;
+    endif;
     $motorista->save();
 }
 

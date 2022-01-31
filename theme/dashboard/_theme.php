@@ -48,11 +48,15 @@
 							</a>
 
 							<a class="nav-link dropdown-toggle d-none d-sm-inline-block" href="#" data-toggle="dropdown">
-								<span class="text-dark"><?= $_SESSION["nome"] . " " . $_SESSION["sobrenome"] ?></span>
+								<?php if(isset($_SESSION["imgprofile"])):?>
+								<img src="<?= url("{$_SESSION["imgprofile"]}")?>" class="avatar img-fluid rounded" alt="Charles Hall" />
+									<?php else: ?>
+										<span class="text-dark"><?= $_SESSION["nome"] . " " . $_SESSION["sobrenome"] ?></span>
+										<?php endif; ?>
 							</a>
 							<div class="dropdown-menu dropdown-menu-right">
-								<a class="dropdown-item" href="pages-profile.html"><i class="align-middle mr-1" data-feather="user"></i> Perfil</a>
-								<a class="dropdown-item" href="#"><i class="align-middle mr-1" data-feather="pie-chart"></i> Dashboard</a>
+								<a class="dropdown-item" href="<?= url("console/perfil")?>"><i class="align-middle mr-1" data-feather="user"></i> Perfil</a>
+								<a class="dropdown-item" href="<?= url("console/")?>"><i class="align-middle mr-1" data-feather="pie-chart"></i> Dashboard</a>
 								<div class="dropdown-divider"></div>
 								<a class="dropdown-item" href="<?= url("logout") ?>">Sair</a>
 							</div>

@@ -26,8 +26,7 @@ class File extends Uploader
         "application/vnd.ms-excel",
         "application/vnd.openxmlformats-officedocument.spreadsheetml.sheet",
         "application/vnd.oasis.opendocument.spreadsheet",
-        "application/vnd.oasis.opendocument.text",
-        "text/plain"
+        "application/vnd.oasis.opendocument.text"
     ];
 
     /**
@@ -45,8 +44,7 @@ class File extends Uploader
         "xls",
         "xlsx",
         "ods",
-        "odt",
-        "txt"
+        "odt"
     ];
 
     /**

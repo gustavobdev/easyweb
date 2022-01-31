@@ -6,6 +6,12 @@ function messageDash()
     {
             session_start();
     }
+    if (isset($_SESSION["img_profile"])) {
+        error("{$_SESSION["img_icon"]}", "{$_SESSION["img_title"]}", "{$_SESSION["img_profile"]}");
+        unset($_SESSION["img_icon"]);
+        unset($_SESSION["img_title"]);
+        unset($_SESSION["img_profile"]);
+    }
     if (isset($_SESSION["success_msg"])) {
         error("success", "Feito!", "{$_SESSION["success_msg"]}");
         unset($_SESSION["success_msg"]);

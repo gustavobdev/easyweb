@@ -50,7 +50,7 @@ $this->layout("_theme2", ["title" => $title]);
                         <div class="form-heading text-center">
                             <h3 class="form-title">Faça o login na sua conta!</h3>
                         </div>
-                        <form method="post" action="<?=url("login") ?>">
+                        <form method="post" action="<?= url("login") ?>">
                             <div class="row">
                                 <div class="col-12">
                                     <div class="form-group">
@@ -58,9 +58,9 @@ $this->layout("_theme2", ["title" => $title]);
                                     </div>
                                 </div>
                                 <div class="col-12">
-                                    <div class="form-group">
+                                    <div class="input-group">
                                         <input id="senha" name="senha" class="form-control" type="password" value="<?= $senha ?>" placeholder="Senha">
-                                        <span id="olho"><small style="color: #fa4612;">Mostrar senha</small></span>
+                                        <button id="olho" class="btn btn-secondary text-center" type="button"><i style="color: white;" class="align-middle fas fa-fw fa-eye"></i></button>
                                     </div>
                                 </div>
                                 <div class="col-lg-6 col-md-6 form-condition">
@@ -90,21 +90,24 @@ $this->layout("_theme2", ["title" => $title]);
 
     <script type="text/javascript">
         $(document).ready(function() {
-            var senha = $("#senha");
-            var olho = $("#olho");
-
-            olho.mousedown(function() {
-                senha.attr("type", "text");
+            $('button').focus(function() {
+                this.blur();
             });
+            $('#olho').on('click', function() {
 
-            olho.mouseup(function() {
-                senha.attr("type", "password");
-            });
-            // para evitar o problema de arrastar a imagem e a senha continuar exposta, 
-            //citada pelo nosso amigo nos comentários
+                var passwordField = $('#senha');
+                var passwordFieldType = passwordField.attr('type');
 
-            $("#olho").mouseout(function() {
-                $("#senha").attr("type", "password");
+                if (passwordFieldType == 'password') {
+
+                    passwordField.attr('type', 'text');
+
+                    $(this).html('<i style="color: white;" class="align-middle fas fa-fw fa-eye-slash"></i>');
+                } else {
+                    passwordField.attr('type', 'password');
+
+                    $(this).html('<i style="color: white;" class="align-middle fas fa-fw fa-eye"></i>');
+                }
             });
         });
     </script>

@@ -87,6 +87,13 @@ $router->post("/welcome","Mailer:welcome");
 //Console
 $router->group("console")->namespace("Source\App\Dashboard");
 $router->get("/","Admin:home","Admin.home");
+
+//perfil
+$router->get("/perfil","Admin:perfil","Admin.perfil");
+$router->post("/perfil/uploadimg","Admin:uimgprofile","Admin.uimgprofile");
+$router->post("/perfil/upgrade","Admin:upgradeprofile","Admin.upgradeprofile");
+$router->post("/perfil/upgradepassword","Admin:upgradepassword","Admin.upgradepassword");
+
 //fretes
 $router->get("/fretes", "Admin:frete", "Admin.frete");
 $router->get("/fretespdf", "Admin:fretepdf", "Admin.fretepdf");
@@ -97,12 +104,14 @@ $router->get("/multas", "Admin:multas", "Admin.multas");
 $router->post("/multas/searchcar", "Admin:searchcar", "Admin.searchcar");
 $router->post("/multas/fetchdriverinfo", "Admin:fetchdriverinfo", "Admin.fetchdriverinfo");
 $router->post("/multas/nova", "Admin:novaMulta", "Admin.novaMulta");
+$router->post("/multas/upgrade", "Admin:upgradeMulta", "Admin.upgradeMulta");
 $router->post("/multas/edit", "Admin:editMulta", "Admin.editMulta");
 $router->post("/multas/destroy", "Admin:destroyMulta", "Admin.destroyMulta");
 $router->post("/multas/viewpdf", "Admin:viewpdf", "Admin.viewpdf");
 
 //motoristas
 $router->get("/motoristas","Admin:drivers","Admin.drivers");
+$router->post("/motoristas/searchbycar","Admin:searchbycar","Admin.searchbycar");
 $router->post("/fetch/driver","Admin:fetchDriver","Admin.fetchDriver");
 $router->post("/fetch/candidato","Admin:fetchCandidato","Admin.fetchCandidato");
 $router->post("/fetch/caminhao","Admin:fetchCaminhao","Admin.fetchCaminhao");

@@ -29,7 +29,6 @@ messageDash();
         </div>
         <div class="col-md-3"></div>
     </div>
-
     <div class="row">
         <div class="col-xl-6 col-xxl-6 d-flex">
             <div class="w-100">
@@ -331,7 +330,6 @@ messageDash();
                                     <div class="row mb-3">
                                         <div class="col-3">
                                             <label class="form-label" for="docmulta">Upload do Documento</label>
-                                            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
                                             <input type="file" name="docmulta" class="form-control" id="docmulta" required>
                                         </div>
                                         <div class="col-3">
@@ -438,8 +436,7 @@ messageDash();
                                     <div class="row mb-3">
                                         <div class="col-3">
                                             <label class="form-label" for="docmulta">Upload de documentos</label>
-                                            <input type="hidden" name="MAX_FILE_SIZE" value="30000" />
-                                            <input type="file" name="docmulta" class="form-control" id="docmulta" required>
+                                            <input type="file" name="docmultaa" class="form-control" id="docmultaa" required>
                                         </div>
                                         <div class="col-3">
                                             <label class="form-label" for="numero_doc">Numero Doc <small>(auto de infração)</small></label>

@@ -116,12 +116,17 @@ $url = URL_BASE;
                                                                                         <label class="form-label" for="data_agendamento">Data Agendamento <small><b>(Se houver)</b></small></label>
                                                                                         <input type="text" name="data_agendamento" class="form-control" value="" id="data_agendamento" autocomplete="off">
                                                                                 </div>
-                                                                                <div class="col-8">
+                                                                                <div class="col-6">
                                                                                         <label class="form-label" for="inputUsername">Cliente / Transportador</label>
                                                                                         <?= $frete[0]->clientes() ? "<input type='text' name='razao' class='form-control' id='inputUsername'  value='{$frete[0]->clientes()[0]->razao_social}'>" : "<button type='button' class='form-control btn btn-info' data-toggle='modal' data-target='#modalCliente' >Buscar Cliente</button>" ?>
 
                                                                                 </div>
-
+                                                                                <?php if($frete[0]->clientes()): ?>
+                                                                                <div class="col-2">
+                                                                                <label class="form-label" style="color: transparent;" for="btnmudacliente">zzzzzzzzzzzzzzzzzzzzzz</label>
+                                                                                <button type='button' class='btn btn-info' id="btnmudacliente" data-toggle='modal' data-target='#modalCliente' >Mudar Cliente</button>
+                                                                                </div>
+                                                                                <?php endif; ?>
                                                                         </div>
 
                                                                         <div class="row mb-3">
@@ -708,7 +713,7 @@ $url = URL_BASE;
                                         <br>
 
                                         <label>Escolha um Reboque</label>
-                                        <select class="form-control" name="reboque" id="reboque" required>
+                                        <select class="form-control" name="reboque" id="reboque">
                                                 <option>Selecione o cavalo</option>
 
                                         </select>

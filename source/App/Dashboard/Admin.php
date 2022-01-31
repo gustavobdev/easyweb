@@ -73,6 +73,29 @@ class Admin
             "date" => $Date
         ]);
     }
+    public function perfil()
+    {
+
+        echo $this->view->render("/dashboard/perfil");
+    }
+    public function uimgprofile($data)
+    {
+        echo $this->view->render("/fragments/geradores/upimgperfil", [
+            "data" => $data
+        ]);
+    }
+    public function upgradeprofile($data)
+    {
+        echo $this->view->render("/fragments/geradores/upgradeperfil", [
+            "data" => $data
+        ]);
+    }
+    public function upgradepassword($data)
+    {
+        echo $this->view->render("/fragments/geradores/upgradepassword", [
+            "data" => $data
+        ]);
+    }
     public function frete()
     {
         $fretes = (new Frete())->find()->fetch(true);
@@ -178,6 +201,13 @@ class Admin
     {
 
         echo $this->view->render("/fragments/geradores/novamulta", [
+            "data" => $data
+        ]);
+    }
+    public function upgradeMulta($data)
+    {
+
+        echo $this->view->render("/fragments/geradores/upgrademulta", [
             "data" => $data
         ]);
     }
@@ -357,6 +387,14 @@ class Admin
             "status_conta" => $status_conta
         ]);
     }
+    public function searchbycar($data){
+
+        echo $this->view->render("/fragments/geradores/searchbycar", [
+            "data" => $data
+        ]);
+
+    }
+
     public function fetchDriver($data)
     {
         $drivers = (new Motorista())->findById("{$data["id"]}");
@@ -893,11 +931,11 @@ class Admin
             "docfrete" => $docfrete
         ]);
     }
-    public function newDocfrete($data){
+    public function newDocfrete($data)
+    {
         echo $this->view->render("fragments/frete/novo_docfrete", [
             "data" => $data
         ]);
-
     }
     public function editStatus($data)
     {

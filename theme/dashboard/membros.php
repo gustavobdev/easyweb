@@ -24,6 +24,7 @@ if (!isset($_SESSION)) {
                             <thead>
 
                                 <tr>
+                                    <th></th>
                                     <th>Nome</th>
                                     <th>Sobrenome</th>
                                     <th>Setor/Nivel</th>
@@ -40,6 +41,14 @@ if (!isset($_SESSION)) {
                                 foreach ($users as $user) :
                                 ?>
                                     <tr>
+                                        <td>
+                                        <?php if (isset($user->profile_photo)) : ?>
+                                                <img src="<?= url("{$user->profile_photo}") ?>" alt="avatar" class="imaged w100 " style="width: 50px; height: 50px; border-radius: 200px; overflow: hidden;">
+                                            <?php else : ?>
+                                                <img src="<?= url("assets/app/assets/img/sample/avatar/avatar1.jpg") ?>" alt="avatar" class="imaged w100 " style="width: 50px; height: 50px; border-radius: 200px; overflow: hidden;">
+
+                                            <?php endif; ?>
+                                        </td>
                                         <td><?= $user->nome ?></td>
                                         <td><?= $user->sobrenome ?></td>
                                         <td><?= $user->nl_acesso()[0]->desc_acesso ?></td>

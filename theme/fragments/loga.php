@@ -10,7 +10,10 @@ $usermail = (new User())->find("email = :iem","iem={$data["email"]}")->fetch(tru
 $lembrete = (isset($data['lembrete'])) ? $data['lembrete'] : '';
 
 if(isset($usermail)){
+
     if (password_verify($data["senha"], $usermail[0]->password)) {
+        
+        $_SESSION["imgprofile"] = $usermail["0"]->profile_photo;
         $_SESSION["nome"] = $usermail["0"]->nome;
         $_SESSION["sobrenome"] = $usermail["0"]->sobrenome;
         $_SESSION["email"] = $usermail["0"]->email;

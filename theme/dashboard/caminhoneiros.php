@@ -1,10 +1,52 @@
-<?php $this->layout("/dashboard/_theme");
+<?php
+
+use Source\Models\Relacao_Caminhao;
+use Source\Models\Relacao_Reboque;
+
+$this->layout("/dashboard/_theme");
 messageDash();
 if (!isset($_SESSION)) {
     session_start();
 }
 ?>
+<div class="row">
+    <div class="col-12 col-xl-12">
+        <div class="card">
+            <div class="card-body">
+                <label class="label-form" for="searchcam">Pesquisar tipo de caminhão</label>
+                <div class="input-group">
+                    <select class="form-control" id="searchcam" data-input="" data-search="<?= url("console/motoristas/searchbycar") ?>">
+                        <option selected disabled>Selecione</option>
+                        <option value="Baú">Baú</option>
+                        <option value="Reboque">Reboque</option>
+                        <option value="Sider">Sider</option>
+                        <option value="Van">Van</option>
+                        <option value="Furgão">Furgão</option>
+                        <option value="Doblo">Doblo</option>
+                        <option value="Carro baixo">Carro baixo</option>
+                    </select>
+                </div>
+            </div>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table class="table">
+                    <thead>
+                        <tr>
+                            <th>Nome</th>
+                            <th>Email</th>
+                            <th>CPF</th>
+                            <th>Tipo de Caminhao</th>
+                        </tr>
+                    </thead>
+                    <tbody id="searchrow">
 
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+</div>
 
 <div class="row">
     <div class="col-12 col-xl-12">
@@ -35,15 +77,13 @@ if (!isset($_SESSION)) {
                                 </tr>
                             </thead>
                             <tbody>
-                                <?php
-                                /*@var Clients*/
-                                foreach ($drivers as $driver) :
+                                <?php foreach ($drivers as $driver) :
                                 ?>
                                     <tr>
                                         <td> <?php if (isset($driver->profile_photo)) : ?>
                                                 <img src="<?= url("{$driver->profile_photo}") ?>" alt="avatar" class="imaged w100 " style="width: 50px; height: 50px; border-radius: 200px; overflow: hidden;">
                                             <?php else : ?>
-                                                <img src="<?= url("assets/app/assets/img/sample/avatar/avatar1.jpg") ?>" alt="avatar" class="imaged w100 rounded" style="width: 50px; height: 50px; border-radius: 200px; overflow: hidden;">
+                                                <img src="<?= url("assets/app/assets/img/sample/avatar/avatar1.jpg") ?>" alt="avatar" class="imaged w100 " style="width: 50px; height: 50px; border-radius: 200px; overflow: hidden;">
 
                                             <?php endif; ?>
                                         </td>
@@ -176,7 +216,7 @@ if (!isset($_SESSION)) {
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                        <div class="col-3">
+                                            <div class="col-3">
                                                 <label class="form-label" for="phone1">Telefone Principal</label>
                                                 <input type="text" name="phone1" class="form-control" id="phone1" onkeypress="$(this).mask('(00) 0000-00009')" autocomplete="off">
                                             </div>
@@ -296,11 +336,11 @@ if (!isset($_SESSION)) {
                                                             <option class="text-success" value="<?= $statu->id ?>"><?= $statu->status_desc ?></option>
                                                         <?php endif;
                                                         if ($statu->id === "2") : ?>
-                                                            <option class="text-warning"  value="<?= $statu->id ?>"><?= $statu->status_desc ?></option>
+                                                            <option class="text-warning" value="<?= $statu->id ?>"><?= $statu->status_desc ?></option>
 
                                                         <?php endif;
                                                         if ($statu->id === "3") : ?>
-                                                            <option class="text-danger"  value="<?= $statu->id ?>"><?= $statu->status_desc ?></option>
+                                                            <option class="text-danger" value="<?= $statu->id ?>"><?= $statu->status_desc ?></option>
 
                                                     <?php endif;
                                                     endforeach; ?>
@@ -339,7 +379,7 @@ if (!isset($_SESSION)) {
                                             </div>
                                         </div>
                                         <div class="row mb-3">
-                                        <div class="col-3">
+                                            <div class="col-3">
                                                 <label class="form-label" for="driver_phone">Telefone Principal</label>
                                                 <input type="text" name="driver_phone" class="form-control" id="driver_phone" onkeypress="$(this).mask('(00) 0000-00009')" autocomplete="off">
                                             </div>
@@ -424,7 +464,28 @@ if (!isset($_SESSION)) {
         </div>
     </div>
     <?php $this->push("scripts") ?>
+
     <script>
+        $('body').on("change", "[data-search]", function(e) {
+            e.preventDefault();
+
+            var data = $(this).data();
+            var inputsearch = $("#searchcam").val();
+            data.input += (inputsearch);
+
+            $.post(data.search, data, function(data) {
+
+                // alert(data);
+                console.log(data);
+                $("#searchcam").val("");
+                $("#searchrow").html(data);
+            }, "json").fail(function(data) {
+                console.log(data);
+                alert("Erro ao processar requisição");
+            });
+
+        });
+
         $(document).ready(function() {
 
             $('#usertable').DataTable({

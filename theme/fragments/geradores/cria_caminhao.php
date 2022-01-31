@@ -16,29 +16,18 @@ if (!isset($_SESSION)) {
     session_start();
 }
 
-/*
-foreach ($data as $key => $value) {
-    if (empty($value) or is_null($value)) {
-        $_SESSION["decline_newdriver"] = "Dados incompletos! por favor adicione todas as informações";
-        $router->redirect("console/cria/caminhao");
-        die();
-    }
-}
-*/
 
-$renavam_caminhao = (new Caminhao())->find("renavam_caminhao = :ema and placa_caminhao = :pla", "ema={$data["renavam_caminhao"]}&pla={$data["placa_caminhao"]}")->fetch(true);
-if (isset($renavam_caminhao)) {
-    $_SESSION["decline_newdriver"] = "O caminhão já possui cadastro no sistema!";
+var_dump($data);
+$motorista = (new Motorista())->find("id = :idm", "idm={$data["motorista"]}")->fetch(true);
+if (!isset($motorista)) {
+    $_SESSION["decline_newdriver"] = "Adicione um motorista!";
     $router->redirect("console/cria/caminhao");
+
     die();
 }
 
-$renavam_reboque = (new Reboque())->find("renavam_reboque = :ema and placa_reboque = :pla", "ema={$data["renavam_reboque"]}&pla={$data["placa_reboque"]}")->fetch(true);
-if (isset($renavam_reboque)) {
-    $_SESSION["decline_newdriver"] = "O reboque já possui cadastro no sistema!";
-    $router->redirect("console/cria/caminhao");
-    die();
-}
+
+
 
 $cor = SanitizeSpecialChars($data["cor"]);
 if (
@@ -48,10 +37,16 @@ if (
     is_null($data["cor"]) xor empty($data["cor"]) ||
     is_null($data["tipo_caminhao"]) xor empty($data["tipo_caminhao"])
 ) {
-    $_SESSION["decline_newdriver"] = "Digite todas as informações do caminhão!";
-    $router->redirect("console/cria/caminhao");
-    die();
-} else {
+    echo "ta vazio";
+    $salvacaminhao = false;
+
+}else{
+    $renavam_caminhao = (new Caminhao())->find("renavam_caminhao = :ema and placa_caminhao = :pla", "ema={$data["renavam_caminhao"]}&pla={$data["placa_caminhao"]}")->fetch(true);
+    if (isset($renavam_caminhao)) {
+        $_SESSION["decline_newdriver"] = "O caminhão já possui cadastro no sistema!";
+        $router->redirect("console/cria/caminhao");
+        die();
+    }
     /**Salva Caminhão */
     $caminhao = new Caminhao();
     if (isset($data["caminhao_interno"])) {
@@ -71,15 +66,28 @@ if (
     $relacao_caminhao->id_motorista = $data["motorista"];
     $relacao_caminhao->id_caminhao = $caminhao->id;
     $relacao_caminhao->save();
-}
+    if ($caminhao->save() != false) {
+        $salvacaminhao = true;
+    }
+} 
+   
+
 
 if (
     is_null($data["renavam_reboque"]) xor empty($data["renavam_reboque"]) ||
     is_null($data["placa_reboque"]) xor empty($data["placa_reboque"]) ||
     is_null($data["tipo_reboque"]) xor empty($data["tipo_reboque"])
-) {
-    echo "essa krl";
-} else {
+)  {
+    echo "ta vazio";
+    $salvareboque = false;
+
+}else{
+    $renavam_reboque = (new Reboque())->find("renavam_reboque = :ema and placa_reboque = :pla", "ema={$data["renavam_reboque"]}&pla={$data["placa_reboque"]}")->fetch(true);
+    if (isset($renavam_reboque)) {
+        $_SESSION["decline_newdriver"] = "O reboque já possui cadastro no sistema!";
+        $router->redirect("console/cria/caminhao");
+        die();
+    }
     /**Salva Reboque */
     $reboque = new Reboque();
     if (isset($data["reboque_interno"])) {
@@ -96,11 +104,28 @@ if (
     $relacao_reboque->id_motorista = $data["motorista"];
     $relacao_reboque->id_reboque = $reboque->id;
     $relacao_reboque->save();
+
+    if ($reboque->save() != false) {
+        $salvareboque = true;
+    }
 }
 
-if ($caminhao->save() != false) {
-    $_SESSION["success_newdriver"] = "Informações salvas com sucesso!";
-    $router->redirect("/console");
+if ($salvacaminhao === true && $salvareboque === false) {
+    $_SESSION["success_newdriver"] = "Caminhão registrado com sucesso no nome de {$motorista[0]->nome}!";
+    $router->redirect("/console/cria/caminhao");
+    die();
+} elseif ($salvareboque === true && $salvacaminhao === false) {
+    $_SESSION["success_newdriver"] = "Reboque registrado com sucesso no nome de {$motorista[0]->nome}!";
+    $router->redirect("/console/cria/caminhao");
+    die();
+} elseif ($salvacaminhao === true && $salvareboque === true) {
+    $_SESSION["success_newdriver"] = "Caminhão e Reboque registrado com sucesso no nome de {$motorista[0]->nome}!";
+    $router->redirect("/console/cria/caminhao");
+    die();
+} else {
+    $_SESSION["decline_newdriver"] = "Houve um erro na solicitação!";
+    $router->redirect("/console/cria/caminhao");
+    die();
 }
 /*
 //Create a new PHPMailer instance

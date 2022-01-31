@@ -24,7 +24,7 @@ class Frete extends DataLayer
     public function reboque()
     {
         $motorista = (new Motorista())->find("id = :mid","mid={$this->motorista}")->fetch(true);
-        return (new Reboque())->find("id = :ird","rid={$motorista[0]->id_reboque}")->fetch(true);
+        return (new Reboque())->find("id = :rid","rid={$motorista[0]->id_reboque}")->fetch(true);
 
     }
 

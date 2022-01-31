@@ -1,19 +1,15 @@
 <?php
+include __DIR__ . "/../vendor/autoload.php";
 
-use PHPMailer\PHPMailer\PHPMailer;
-use PHPMailer\PHPMailer\SMTP;
-
-include _DIR_ . "/../vendor/autoload.php";
-
-define("URL_BASE", "https://transdonis.herokuapp.com/");
+define("URL_BASE", "http://localhost/mvcc/");
 
 define("DATA_LAYER_CONFIG", [
     "driver" => "mysql",
-    "host" => "kutnpvrhom7lki7u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com",
+    "host" => "localhost",
     "port" => "3306",
-    "dbname" => "vxfkvovlvera1kiq",
-    "username" => "rt38wt2ysx9xhqkh",
-    "passwd" => "ko0uy2nvrvixy85m",
+    "dbname" => "transdoni",
+    "username" => "root",
+    "passwd" => "",
     "options" => [
         PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8",
         PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION,
@@ -21,39 +17,20 @@ define("DATA_LAYER_CONFIG", [
         PDO::ATTR_CASE => PDO::CASE_NATURAL,
     ],
 ]);
-date_default_timezone_set('America/Sao_Paulo');
 
-define("HOST", "kutnpvrhom7lki7u.cbetxkdyhwsb.us-east-1.rds.amazonaws.com");
-define("USER", "rt38wt2ysx9xhqkh");
-define("PASS", "ko0uy2nvrvixy85m");
-define("DB", "vxfkvovlvera1kiq");
+define("HOST", "localhost");
+define("USER", "root");
+define("PASS", "");
+define("DB", "transdoni");
 
-/**
- * @return PHPMailer
- */
-function getSend(): PHPMailer
-{
-    $send = new PHPMailer();
-    $send->isSMTP();
-    $send->setLanguage("br");
-    $send->SMTPDebug = false;
-    $send->Host = 'smtp.gmail.com';
-    $send->Port = 465;
-    $send->SMTPSecure = "ssl";
-    $send->SMTPAuth = true;
-    $send->SMTPOptions = array(
-        'ssl' => array(
-            'verify_peer' => false,
-            'verify_peer_name' => false,
-            'allow_self_signed' => true
-        )
-    );
-    $send->Username = 'esayfreight@gmail.com';
-    $send->Password = 'Santos-13';
-    return $send;
-}
-
-
+define("MAIL", [
+    "host" => "smtp.gmail.com",
+    "port" => "587",
+    "user" => "financeiro@softgbs.com",
+    "passwd" => "tetratonica",
+    "from_name" => "Gustavo Bomfim",
+    "from_email" => "gbomfim@softgbs.com",
+]);
 
 function url(string $path = null): string
 {

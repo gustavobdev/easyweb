@@ -75,7 +75,7 @@ if(isset($data["id_reboque"])){
 
     if ($_FILES) {
         try {
-            $upload = $file->upload($_FILES['docmulta'], $data['namedocc']);
+            $upload = $file->upload($_FILES['docmultaa'], $data['namedocc']);
 
             $multas = new Multas();
             $multas->id_caminhao = null;
